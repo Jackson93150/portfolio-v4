@@ -1,0 +1,10 @@
+node_modules
+public
+.vscode
+package.json
+package-lock.json
+lib
+build
+dist
+stats.html
+.vite
