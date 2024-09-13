@@ -141,7 +141,7 @@ export class GrassGeometry extends THREE.BufferGeometry {
   }
 }
 
-const cloudTexture = new THREE.TextureLoader().load('/patttern.png');
+const cloudTexture = new THREE.TextureLoader().load('/pattern.png');
 cloudTexture.wrapS = cloudTexture.wrapT = THREE.RepeatWrapping;
 
 export class Grass extends THREE.Mesh {
