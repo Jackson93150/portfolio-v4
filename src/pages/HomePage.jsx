@@ -1,6 +1,7 @@
 /* eslint-disable react/no-unknown-property */
 import HomeScene from '@/components/HomeScene';
 import { Canvas } from '@react-three/fiber';
+import { Environment } from '@react-three/drei';
 
 export function HomePage() {
   return (
@@ -9,12 +10,12 @@ export function HomePage() {
         className="h-screen"
         shadows
         camera={{
-          position: [10, 0, 0],
+          position: [3, 0.5, 1],
           fov: 30,
         }}
       >
-        <ambientLight intensity={1.5} />
-        <color attach="background" args={['#213040']} />
+        <Environment files="3d-render-tree-landscape-against-night-sky.hdr" />
+        <color attach="background" args={['#0b2351']} />
         <HomeScene />
       </Canvas>
     </div>
