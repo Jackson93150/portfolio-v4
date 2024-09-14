@@ -18,7 +18,7 @@ export function House(props) {
       {...props}
       dispose={null}
       rotation={[0, Math.PI / 2, 0]}
-      position={[-3, 0, 1]}
+      position={[-3, 0.4, 1]}
     >
       <group scale={0.004}>
         <mesh

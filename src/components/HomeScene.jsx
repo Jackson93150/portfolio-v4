@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unknown-property */
-import { OrbitControls, Plane } from '@react-three/drei';
+import { OrbitControls, Plane, Text3D } from '@react-three/drei';
 import { useLoader, useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 import { useRef, useState } from 'react';
@@ -46,9 +46,21 @@ export default function HomeScene() {
       <Avatar />
       <House />
       <Lantern />
+      {'JACKSON'.split('').map((letter, index) => (
+        <Text3D
+          key={index}
+          position={[0.02, 0.75 - index * 0.07, 1.965]}
+          scale={[0.06, 0.06, 0.06]}
+          font={'font/hachimaki.json'}
+          material-color="black"
+          rotation={[0, -Math.PI / 1, 0]}
+        >
+          {letter}
+        </Text3D>
+      ))}
       <Plane
         ref={planeRef}
-        args={[15, 8]}
+        args={[17, 10]}
         position={[-6, 2.2, 5]}
         rotation={[0, Math.PI / 2, 0]}
       >
