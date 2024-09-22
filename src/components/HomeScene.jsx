@@ -1,12 +1,25 @@
 /* eslint-disable react/no-unknown-property */
-import { OrbitControls, Plane, Text3D } from '@react-three/drei';
+import {
+  OrbitControls,
+  Plane,
+  Text3D,
+  useHelper,
+  Shadow,
+} from '@react-three/drei';
 import { useLoader, useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
-import { useRef, useState } from 'react';
+import { useRef, useState, Suspense } from 'react';
 import GrassScene from './GrassScene';
 import { Avatar } from './Avatar';
 import { House } from './House';
 import { Lantern } from './Lantern';
+import { Tableau } from './Tableau';
+import {
+  Bloom,
+  SMAA,
+  EffectComposer,
+  BrightnessContrast,
+} from '@react-three/postprocessing';
 
 export default function HomeScene() {
   const texture = useLoader(THREE.TextureLoader, '/space2bis.jpg');
@@ -15,7 +28,7 @@ export default function HomeScene() {
   const [startTime] = useState(Date.now());
   const duration = 2 * 60 * 1000;
 
-  // useHelper(spotLightRef, THREE.SpotLightHelper);
+  useHelper(spotLightRef, THREE.PointLightHelper);
 
   useFrame(() => {
     if (planeRef.current) {
@@ -35,7 +48,6 @@ export default function HomeScene() {
       <OrbitControls />
       <ambientLight intensity={0.5} />
       <spotLight
-        ref={spotLightRef}
         position={[0, 1.2, 1.9]}
         intensity={10}
         angle={Math.PI / 3}
@@ -45,6 +57,7 @@ export default function HomeScene() {
       <GrassScene />
       <Avatar />
       <House />
+      <Tableau />
       <Lantern />
       {'JACKSON'.split('').map((letter, index) => (
         <Text3D
@@ -66,6 +79,23 @@ export default function HomeScene() {
       >
         <meshStandardMaterial map={texture} />
       </Plane>
+      <Shadow
+        color="black"
+        colorStop={0}
+        opacity={0.5}
+        fog={false} // Reacts to fog (default=false)
+      />
+      <Suspense fallback={null}>
+        <EffectComposer>
+          <SMAA />
+          <Bloom
+            luminanceThreshold={0.9}
+            luminanceSmoothing={0.2}
+            height={300}
+          />
+          <BrightnessContrast brightness={-0.05} contrast={0.15} />
+        </EffectComposer>
+      </Suspense>
     </>
   );
 }
