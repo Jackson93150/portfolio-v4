@@ -1,11 +1,5 @@
 /* eslint-disable react/no-unknown-property */
-import {
-  OrbitControls,
-  Plane,
-  Text3D,
-  useHelper,
-  Shadow,
-} from '@react-three/drei';
+import { Plane, Text3D, useHelper, Shadow } from '@react-three/drei';
 import { useLoader, useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 import { useRef, useState, Suspense } from 'react';
@@ -45,7 +39,6 @@ export default function HomeScene() {
 
   return (
     <>
-      <OrbitControls />
       <ambientLight intensity={0.5} />
       <spotLight
         position={[0, 1.2, 1.9]}
